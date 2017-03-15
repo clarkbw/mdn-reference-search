@@ -6,6 +6,11 @@ A WebExtension that uses the keyword `mdn` to trigger a search of the CSS and Ja
 
 ### Development
 
+Here are some example results from the MDN Search.
+
+* JavaScript search: https://developer.mozilla.org/en-US/search.json?q=assign&topic=css&topic=js
+* CSS search: https://developer.mozilla.org/en-US/search.json?q=margin&topic=css&topic=js
+
 Follow the instructions for developing [WebExtensions](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
 
 When you're ready to make your PR, be sure to run the following so your code is automatically formatted.
