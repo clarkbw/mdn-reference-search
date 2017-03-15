@@ -2,14 +2,7 @@ const BASE_URL = `https://developer.mozilla.org`;
 const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
 const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
-const isChrome = typeof browser === 'undefined';
-
-// Currently Firefox auto-highlights but Chrome requires this XML syntax
-function chromeHighlightMatch(text = '', match = '') {
-  return text.replace(match, `<match>${match}</match>`);
-}
-
-const highlightMatch = isChrome ? chromeHighlightMatch : text => text;
+const highlight = require('highlight');
 
 // Provide help text to the user.
 chrome.omnibox.setDefaultSuggestion({
@@ -57,7 +50,7 @@ function handleResponse(response) {
         pages.map(page => {
           return {
             content: page.url,
-            description: highlightMatch(page.title, json.query)
+            description: highlight(page.title, json.query)
           };
         })
       );

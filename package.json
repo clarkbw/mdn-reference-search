@@ -7,9 +7,14 @@
   "author": "Bryan Clark <clarkbw@gmail.com>",
   "license": "MPL-2.0",
   "devDependencies": {
-    "prettier": "^0.22.0"
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.0",
+    "babel-preset-env": "^1.2.1",
+    "prettier": "^0.22.0",
+    "webpack": "^2.2.1"
   },
   "scripts": {
+    "build": "webpack",
     "prettier": "prettier --write --single-quote --print-width 80 \"background.js\""
   }
 }
