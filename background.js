@@ -37,20 +37,9 @@ browser.omnibox.onInputEntered.addListener((text, disposition) => {
   }
 });
 
-const emptyResults = [
-  {
-    content: SEARCH_DEFAULT_URL,
-    description: 'no results found',
-  },
-];
-
 function handleResponse(response) {
   return new Promise(resolve => {
     response.json().then(json => {
-      if (json.pages <= 0) {
-        return resolve(emptyResults);
-      }
-
       const pages = json.documents
         .filter(doc => doc.tags.includes('Reference'))
         .slice(0, 5);
