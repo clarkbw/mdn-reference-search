@@ -2,15 +2,22 @@ const BASE_URL = `https://developer.mozilla.org`;
 const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
 const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
-const browser = chrome || browser;
+const isChrome = typeof browser === 'undefined';
+
+// Currently Firefox auto-highlights but Chrome requires this XML syntax
+function chromeHighlightMatch(text = '', match = '') {
+  return text.replace(match, `<match>${match}</match>`);
+}
+
+const highlightMatch = isChrome ? chromeHighlightMatch : text => text;
 
 // Provide help text to the user.
-browser.omnibox.setDefaultSuggestion({
+chrome.omnibox.setDefaultSuggestion({
   description: `Search MDN (e.g. "margin" | "splice")`
 });
 
 // Update the suggestions whenever the input is changed.
-browser.omnibox.onInputChanged.addListener((text, addSuggestions) => {
+chrome.omnibox.onInputChanged.addListener((text, addSuggestions) => {
   const headers = new Headers({ Accept: 'application/json' });
   const init = { method: 'GET', headers };
   const q = encodeURIComponent(text);
@@ -21,7 +28,7 @@ browser.omnibox.onInputChanged.addListener((text, addSuggestions) => {
 });
 
 // Open the page based on how the user clicks on a suggestion.
-browser.omnibox.onInputEntered.addListener((text, disposition) => {
+chrome.omnibox.onInputEntered.addListener((text, disposition) => {
   const url = text.startsWith('https://')
     ? text
     : `${SEARCH_DEFAULT_URL}${text}`;
@@ -50,10 +57,7 @@ function handleResponse(response) {
         pages.map(page => {
           return {
             content: page.url,
-            description: page.title.replace(
-              json.query,
-              `<match>${json.query}</match>`
-            )
+            description: highlightMatch(page.title, json.query)
           };
         })
       );
