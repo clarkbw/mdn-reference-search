@@ -43,7 +43,6 @@ const emptyResults = [
 function handleResponse(response) {
   return new Promise(resolve => {
     response.json().then(json => {
-      console.log("JSON", json);
 
       if (json.pages <= 0) {
         return resolve(emptyResults);
