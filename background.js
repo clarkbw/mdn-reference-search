@@ -55,7 +55,7 @@ function handleResponse(response) {
         pages.map(page => {
           return {
             content: page.url,
-            description: page.slug,
+            description: page.title,
           };
         }),
       );
