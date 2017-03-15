@@ -1,3 +1,9 @@
+const BASE_URL = `https://developer.mozilla.org`;
+const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
+
+import highlight from './highlight';
+
 export const defaultSuggestion = {
   description: `Search MDN (e.g. "margin" | "splice")`
 };
