@@ -10,6 +10,6 @@
     "prettier": "^0.22.0"
   },
   "scripts": {
-    "prettier": "prettier --write --single-quote --trailing-comma all --print-width 80 \"background.js\""
+    "prettier": "prettier --write --single-quote --print-width 80 \"background.js\""
   }
 }

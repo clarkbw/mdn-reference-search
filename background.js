@@ -2,9 +2,11 @@ const BASE_URL = `https://developer.mozilla.org`;
 const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
 const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
+const browser = chrome || browser;
+
 // Provide help text to the user.
 browser.omnibox.setDefaultSuggestion({
-  description: `Search MDN (e.g. "margin" | "splice")`,
+  description: `Search MDN (e.g. "margin" | "splice")`
 });
 
 // Update the suggestions whenever the input is changed.
@@ -48,9 +50,12 @@ function handleResponse(response) {
         pages.map(page => {
           return {
             content: page.url,
-            description: page.title,
+            description: page.title.replace(
+              json.query,
+              `<match>${json.query}</match>`
+            )
           };
-        }),
+        })
       );
     });
   });
