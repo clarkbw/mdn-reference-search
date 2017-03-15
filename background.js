@@ -1,5 +1,6 @@
-const BASE_URL = `https://developer.mozilla.org/`;
-const URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+const BASE_URL = `https://developer.mozilla.org`;
+const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
 // Provide help text to the user.
 browser.omnibox.setDefaultSuggestion({
@@ -11,7 +12,7 @@ browser.omnibox.onInputChanged.addListener((text, addSuggestions) => {
   const headers = new Headers({ Accept: 'application/json' });
   const init = { method: 'GET', headers };
   const q = encodeURIComponent(text);
-  const url = `${URL}${q}`;
+  const url = `${SEARCH_API_URL}${q}`;
   const request = new Request(url, init);
 
   fetch(request).then(handleResponse).then(addSuggestions);
@@ -19,7 +20,10 @@ browser.omnibox.onInputChanged.addListener((text, addSuggestions) => {
 
 // Open the page based on how the user clicks on a suggestion.
 browser.omnibox.onInputEntered.addListener((text, disposition) => {
-  const url = text;
+  const url = text.startsWith('https://')
+    ? text
+    : `${SEARCH_DEFAULT_URL}${text}`;
+
   switch (disposition) {
     case 'currentTab':
       browser.tabs.update({ url });
@@ -35,7 +39,7 @@ browser.omnibox.onInputEntered.addListener((text, disposition) => {
 
 const emptyResults = [
   {
-    content: BASE_URL,
+    content: SEARCH_DEFAULT_URL,
     description: 'no results found',
   },
 ];
