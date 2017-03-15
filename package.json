@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "build:watch": "webpack --watch",
     "prettier": "prettier --write --single-quote --print-width 80 \"src/*.js\""
   }
 }
