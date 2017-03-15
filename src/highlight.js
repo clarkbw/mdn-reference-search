@@ -1,10 +1,12 @@
 const isChrome = typeof browser === 'undefined';
 
 // Currently Firefox auto-highlights but Chrome requires this XML syntax
-function chromeHighlightMatch(text = '', match = '') {
+export function chromeHighlightMatch(text = '', match = '') {
   return text.replace(match, `<match>${match}</match>`);
 }
 
-const highlight = isChrome ? chromeHighlightMatch : text => text;
+export function firefoxHighlightMatch(text) { return text; }
 
-modules.export = highlight;
+const highlight = isChrome ? chromeHighlightMatch : firefoxHighlightMatch;
+
+export default highlight;
