@@ -15,6 +15,6 @@
   },
   "scripts": {
     "build": "webpack",
-    "prettier": "prettier --write --single-quote --print-width 80 \"background.js\""
+    "prettier": "prettier --write --single-quote --print-width 80 \"src/*.js\""
   }
 }
