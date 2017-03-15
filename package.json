@@ -1,0 +1,15 @@
+{
+  "name": "mdn-code-search",
+  "version": "1.0.0",
+  "description": "Search MDN for JS and CSS from the URL bar",
+  "main": "background.js",
+  "repository": "git@github.com:clarkbw/mdn-reference-search.git",
+  "author": "Bryan Clark <clarkbw@gmail.com>",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "prettier": "^0.22.0"
+  },
+  "scripts": {
+    "prettier": "prettier --write --single-quote --trailing-comma all --print-width 80 \"background.js\""
+  }
+}

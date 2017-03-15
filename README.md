@@ -6,7 +6,14 @@ A WebExtension that uses the keyword `mdn` to trigger a search of the CSS and Ja
 
 ### Development
 
-I'm using `prettier` for code formatting and you should too.  I haven't set this up to be automatic but it should be; please make a PR for this.
+Follow the instructions for developing [WebExtensions](https://developer.mozilla.org/en-US/Add-ons/WebExtensions).
+
+When you're ready to make your PR, be sure to run the following so your code is automatically formatted.
+
+```bash
+yarn install
+yarn run prettier
+```
 
 ### License
 
