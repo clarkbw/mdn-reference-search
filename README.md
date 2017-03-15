@@ -18,6 +18,7 @@ When you're ready to make your PR, be sure to run the following so your code is 
 ```bash
 yarn install
 yarn run prettier
+yarn run build
 ```
 
 ### License

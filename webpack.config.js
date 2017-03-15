@@ -3,7 +3,7 @@ module.exports = {
     background: "./src/background.js"
   },
   output: {
-    path: ".",
+    path: "extension",
     filename: "[name].js"
   },
   module: {
