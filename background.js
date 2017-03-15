@@ -8,41 +8,37 @@ browser.omnibox.setDefaultSuggestion({
 
 // Update the suggestions whenever the input is changed.
 browser.omnibox.onInputChanged.addListener((text, addSuggestions) => {
-  const headers = new Headers({"Accept": "application/json"});
-  const init = {method: 'GET', headers};
+  const headers = new Headers({ Accept: "application/json" });
+  const init = { method: "GET", headers };
   const q = encodeURIComponent(text);
   const url = `${URL}${q}`;
   const request = new Request(url, init);
 
-  fetch(request)
-    .then(handleResponse)
-    .then(addSuggestions);
+  fetch(request).then(handleResponse).then(addSuggestions);
 });
 
 // Open the page based on how the user clicks on a suggestion.
 browser.omnibox.onInputEntered.addListener((text, disposition) => {
-  let url = text;
-  // if (!text.startsWith(SOURCE_URL)) {
-  //   // Update the url if the user clicks on the default suggestion.
-  //   url = `${SEARCH_URL}?q=${text}`;
-  // }
+  const url = text;
   switch (disposition) {
     case "currentTab":
-      browser.tabs.update({url});
+      browser.tabs.update({ url });
       break;
     case "newForegroundTab":
-      browser.tabs.create({url});
+      browser.tabs.create({ url });
       break;
     case "newBackgroundTab":
-      browser.tabs.create({url, active: false});
+      browser.tabs.create({ url, active: false });
       break;
   }
 });
 
-const emptyResults = [{
-  content: BASE_URL,
-  description: "no results found"
-}];
+const emptyResults = [
+  {
+    content: BASE_URL,
+    description: "no results found"
+  }
+];
 
 function handleResponse(response) {
   return new Promise(resolve => {
@@ -53,14 +49,18 @@ function handleResponse(response) {
         return resolve(emptyResults);
       }
 
-      const pages = json.documents.filter(doc => doc.tags.includes('Reference')).slice(0, 5);
+      const pages = json.documents
+        .filter(doc => doc.tags.includes("Reference"))
+        .slice(0, 5);
 
-      return resolve(pages.map(page => {
-        return {
-          content: page.url,
-          description: page.slug
-        }
-      }));
+      return resolve(
+        pages.map(page => {
+          return {
+            content: page.url,
+            description: page.slug
+          };
+        })
+      );
     });
   });
 }
