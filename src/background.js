@@ -1,4 +1,8 @@
-import { defaultSuggestion, handleInputChanged, handleInputEntered } from './omnibox';
+import {
+  defaultSuggestion,
+  handleInputChanged,
+  handleInputEntered
+} from './omnibox';
 
 // Provide help text to the user.
 chrome.omnibox.setDefaultSuggestion(defaultSuggestion);
