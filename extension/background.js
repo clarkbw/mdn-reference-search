@@ -1,0 +1,171 @@
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__highlight__ = __webpack_require__(1);
+/* harmony export (immutable) */ __webpack_exports__["b"] = handleInputChanged;
+/* harmony export (immutable) */ __webpack_exports__["c"] = handleInputEntered;
+const BASE_URL = `https://developer.mozilla.org`;
+const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
+
+
+
+const defaultSuggestion = {
+  description: `Search MDN (e.g. "margin" | "splice")`
+};
+/* harmony export (immutable) */ __webpack_exports__["a"] = defaultSuggestion;
+
+
+function handleInputChanged(text, addSuggestions) {
+  const headers = new Headers({ Accept: 'application/json' });
+  const init = { method: 'GET', headers };
+  const q = encodeURIComponent(text);
+  const url = `${SEARCH_API_URL}${q}`;
+  const request = new Request(url, init);
+
+  fetch(request).then(handleResponse).then(addSuggestions);
+}
+
+function handleResponse(response) {
+  return new Promise(resolve => {
+    response.json().then(json => {
+      const pages = json.documents.filter(doc => doc.tags.includes('Reference')).slice(0, 5);
+
+      return resolve(pages.map(page => {
+        return {
+          content: page.url,
+          description: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__highlight__["a" /* default */])(page.title, json.query)
+        };
+      }));
+    });
+  });
+}
+
+function handleInputEntered(text, disposition) {
+  const url = text.startsWith('https://') ? text : `${SEARCH_DEFAULT_URL}${text}`;
+
+  switch (disposition) {
+    case 'currentTab':
+      browser.tabs.update({ url });
+      break;
+    case 'newForegroundTab':
+      browser.tabs.create({ url });
+      break;
+    case 'newBackgroundTab':
+      browser.tabs.create({ url, active: false });
+      break;
+  }
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export chromeHighlightMatch */
+/* unused harmony export firefoxHighlightMatch */
+const isChrome = typeof browser === 'undefined';
+
+// Currently Firefox auto-highlights but Chrome requires this XML syntax
+function chromeHighlightMatch(text = '', match = '') {
+  return text.replace(match, `<match>${match}</match>`);
+}
+
+function firefoxHighlightMatch(text) {
+  return text;
+}
+
+const highlight = isChrome ? chromeHighlightMatch : firefoxHighlightMatch;
+
+/* harmony default export */ __webpack_exports__["a"] = highlight;
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__omnibox__ = __webpack_require__(0);
+
+
+// Provide help text to the user.
+chrome.omnibox.setDefaultSuggestion(__WEBPACK_IMPORTED_MODULE_0__omnibox__["a" /* defaultSuggestion */]);
+
+// Update the suggestions whenever the input is changed.
+chrome.omnibox.onInputChanged.addListener(__WEBPACK_IMPORTED_MODULE_0__omnibox__["b" /* handleInputChanged */]);
+
+// Open the page based on how the user clicks on a suggestion.
+chrome.omnibox.onInputEntered.addListener(__WEBPACK_IMPORTED_MODULE_0__omnibox__["c" /* handleInputEntered */]);
+
+/***/ })
+/******/ ]);
