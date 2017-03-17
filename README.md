@@ -2,7 +2,7 @@
 
 A WebExtension that uses the keyword `mdn` to trigger a search of the CSS and JavaScript References on MDN.
 
-<img width="1224" alt="screen shot 2017-03-15 at 9 32 57 am" src="https://cloud.githubusercontent.com/assets/2134/23940078/eeacbd10-0963-11e7-8b60-531e44de3611.png">
+<img width="1106" alt="screen shot 2017-03-17 at 2 33 25 pm" src="https://cloud.githubusercontent.com/assets/2134/24063861/afe2d684-0b1e-11e7-88d9-261cce41924e.png">
 
 ![screen shot 2017-03-17 at 2 31 08 pm](https://cloud.githubusercontent.com/assets/2134/24063803/68a0a7ec-0b1e-11e7-89c0-8da72dae19f2.png)
 
