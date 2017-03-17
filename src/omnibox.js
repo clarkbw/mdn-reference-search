@@ -1,6 +1,6 @@
 const BASE_URL = `https://developer.mozilla.org`;
-const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
-const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
+export const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+export const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
 import highlight from './highlight';
 
@@ -44,13 +44,10 @@ export function handleInputEntered(text, disposition) {
 
   switch (disposition) {
     case 'currentTab':
-      browser.tabs.update({ url });
-      break;
+      return chrome.tabs.update({ url });
     case 'newForegroundTab':
-      browser.tabs.create({ url });
-      break;
+      return chrome.tabs.create({ url });
     case 'newBackgroundTab':
-      browser.tabs.create({ url, active: false });
-      break;
+      return chrome.tabs.create({ url, active: false });
   }
 }
