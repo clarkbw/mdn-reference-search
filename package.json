@@ -20,11 +20,13 @@
     "build": "webpack",
     "build:watch": "webpack --watch",
     "prettier": "prettier --write --single-quote --print-width 80 \"src/*.js\" \"src/**/*.js\"",
-    "test": "jest src/**/*.test.js --bail",
+    "test": "jest",
     "coverage": "yarn test -- --coverage"
   },
   "jest": {
-    "setupFiles":[ "./src/__tests__/__setups__/chrome.js"],
+    "setupFiles":[ "./__setups__/chrome.js"],
+    "bail": true,
+    "rootDir": "src",
     "globals": {
       "chrome": {
         "tabs": {},
