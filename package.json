@@ -1,5 +1,6 @@
 {
   "name": "mdn-code-search",
+  "short_name": "MDN Search",
   "version": "1.0.0",
   "description": "Search MDN for JS and CSS from the URL bar",
   "main": "background.js",
