@@ -1,7 +1,7 @@
 {
   "name": "mdn-code-search",
   "short_name": "MDN Search",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Search MDN for JS and CSS from the URL bar",
   "main": "background.js",
   "repository": "git@github.com:clarkbw/mdn-reference-search.git",
