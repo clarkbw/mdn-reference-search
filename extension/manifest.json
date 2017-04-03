@@ -1,7 +1,8 @@
 {
   "name": "MDN Code Search",
+  "short_name": "MDN Search",
   "description" : "To use, type 'mdn' plus your search term into the url bar.",
-  "version": "1.0",
+  "version": "1.0.1",
   "homepage_url": "https://github.com/clarkbw/mdn-code-search",
   "applications": {
     "gecko": {
