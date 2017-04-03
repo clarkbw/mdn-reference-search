@@ -21,7 +21,8 @@
     "build:watch": "webpack --watch",
     "prettier": "prettier --write --single-quote --print-width 80 \"src/*.js\" \"src/**/*.js\"",
     "test": "jest",
-    "coverage": "yarn test -- --coverage"
+    "coverage": "yarn test -- --coverage",
+    "zip": "(cd extension && zip -r ../extension.zip .)"
   },
   "jest": {
     "setupFiles":[ "./__setups__/chrome.js"],
