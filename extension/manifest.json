@@ -3,7 +3,7 @@
   "short_name": "MDN Search",
   "description" : "To use, type 'mdn' plus your search term into the url bar.",
   "version": "1.0.1",
-  "homepage_url": "https://github.com/clarkbw/mdn-code-search",
+  "homepage_url": "https://github.com/clarkbw/mdn-reference-search",
   "applications": {
     "gecko": {
       "strict_min_version": "52.0a1"
