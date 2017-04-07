@@ -1,5 +1,7 @@
 ## MDN Reference Search 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/mdn-reference-search.svg)](https://greenkeeper.io/)
+
 [Chrome](https://chrome.google.com/webstore/detail/mdn-code-search/nifjgldbgogopimfdfclafkhbadkjfca?hl=en-US) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/mdn-search/)
 ---|---
 
