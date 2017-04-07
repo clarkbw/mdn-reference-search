@@ -37,7 +37,8 @@
   },
   "jest": {
     "setupFiles": [
-      "./__setups__/chrome.js"
+      "./__setups__/chrome.js",
+      "./__setups__/fetch.js"
     ],
     "coverageDirectory": "./coverage/",
     "bail": true,
