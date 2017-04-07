@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,12 +71,16 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__highlight__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__highlight__ = __webpack_require__(2);
 /* harmony export (immutable) */ __webpack_exports__["b"] = handleInputChanged;
 /* harmony export (immutable) */ __webpack_exports__["c"] = handleInputEntered;
 const BASE_URL = `https://developer.mozilla.org`;
 const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
+/* unused harmony export SEARCH_API_URL */
+
 const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
+/* unused harmony export SEARCH_DEFAULT_URL */
+
 
 
 
@@ -116,41 +120,16 @@ function handleInputEntered(text, disposition) {
 
   switch (disposition) {
     case 'currentTab':
-      browser.tabs.update({ url });
-      break;
+      return chrome.tabs.update({ url });
     case 'newForegroundTab':
-      browser.tabs.create({ url });
-      break;
+      return chrome.tabs.create({ url });
     case 'newBackgroundTab':
-      browser.tabs.create({ url, active: false });
-      break;
+      return chrome.tabs.create({ url, active: false });
   }
 }
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export chromeHighlightMatch */
-/* unused harmony export firefoxHighlightMatch */
-const isChrome = typeof browser === 'undefined';
-
-// Currently Firefox auto-highlights but Chrome requires this XML syntax
-function chromeHighlightMatch(text = '', match = '') {
-  return text.replace(match, `<match>${match}</match>`);
-}
-
-function firefoxHighlightMatch(text) {
-  return text;
-}
-
-const highlight = isChrome ? chromeHighlightMatch : firefoxHighlightMatch;
-
-/* harmony default export */ __webpack_exports__["a"] = highlight;
-
-/***/ }),
-/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -166,6 +145,31 @@ chrome.omnibox.onInputChanged.addListener(__WEBPACK_IMPORTED_MODULE_0__omnibox__
 
 // Open the page based on how the user clicks on a suggestion.
 chrome.omnibox.onInputEntered.addListener(__WEBPACK_IMPORTED_MODULE_0__omnibox__["c" /* handleInputEntered */]);
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export chromeHighlightMatch */
+/* unused harmony export firefoxHighlightMatch */
+const isChrome = typeof browser === 'undefined';
+
+// Currently Firefox auto-highlights but Chrome requires this XML syntax
+function chromeHighlightMatch() {
+  let text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  let match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+  return text.replace(match, `<match>${match}</match>`);
+}
+
+function firefoxHighlightMatch(text) {
+  return text;
+}
+
+const highlight = isChrome ? chromeHighlightMatch : firefoxHighlightMatch;
+
+/* harmony default export */ __webpack_exports__["a"] = (highlight);
 
 /***/ })
 /******/ ]);

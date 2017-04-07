@@ -16,22 +16,7 @@ module.exports = function(env) {
           exclude: /(node_modules)/,
           use: [
             {
-              loader: 'babel-loader',
-              options: {
-                presets: [
-                  [
-                    'env',
-                    {
-                      targets: {
-                        browsers: [
-                          'last 2 Chrome versions',
-                          'last 2 Firefox versions'
-                        ]
-                      }
-                    }
-                  ]
-                ]
-              }
+              loader: 'babel-loader'
             }
           ]
         }
