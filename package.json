@@ -1,9 +1,9 @@
 {
-  "name": "mdn-code-search",
+  "name": "mdn-reference-search",
   "short_name": "MDN Search",
   "version": "1.0.1",
   "description": "Search MDN for JS and CSS from the URL bar",
-  "main": "background.js",
+  "main": "extension/background.js",
   "repository": "git@github.com:clarkbw/mdn-reference-search.git",
   "author": "Bryan Clark <clarkbw@gmail.com>",
   "license": "MPL-2.0",
@@ -29,7 +29,7 @@
     "zip": "(cd extension && zip -r ../extension.zip .)"
   },
   "lint-staged": {
-    "src/**/*.js": [
+    "./**/*.js": [
       "prettier --write --single-quote --print-width 80",
       "git add"
     ]
@@ -40,7 +40,6 @@
     ],
     "coverageDirectory": "./coverage/",
     "bail": true,
-    "rootDir": "src",
     "globals": {
       "chrome": {
         "tabs": {},
