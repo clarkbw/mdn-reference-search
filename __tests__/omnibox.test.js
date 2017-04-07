@@ -4,7 +4,7 @@ import {
   handleInputEntered,
   SEARCH_API_URL,
   SEARCH_DEFAULT_URL
-} from '../omnibox';
+} from '../src/omnibox';
 
 describe('omnibox', () => {
   it('should return a default suggestion', () => {
@@ -14,12 +14,63 @@ describe('omnibox', () => {
   });
 
   describe('handleInputChanged', () => {
-    xit('should return results from the query', () => {
+    it('should return results from the query', done => {
       const query = 'query';
-      const callback = jest.fn();
+      fetch.mockResponse(
+        JSON.stringify({
+          query: query,
+          documents: [
+            {
+              url: 'https://one',
+              title: 'one',
+              tags: ['Reference']
+            },
+            {
+              url: 'https://two',
+              title: 'two',
+              tags: ['Reference']
+            },
+            {
+              url: 'https://three',
+              title: 'three',
+              tags: ['JavaScript']
+            }
+          ]
+        })
+      );
+
+      const callback = function(results) {
+        expect(results).toHaveLength(2);
+        expect(results[0]).toMatchObject({
+          description: 'one',
+          content: 'https://one'
+        });
+        done();
+      };
       handleInputChanged(query, callback);
       expect(fetch).toHaveBeenCalled();
-      expect(callback).toBeCalledWith();
+    });
+
+    it('should return limited results', done => {
+      const objects = new Array(10).fill({
+        url: 'https://one',
+        title: 'one',
+        tags: ['Reference']
+      });
+      const query = 'query';
+
+      fetch.mockResponse(
+        JSON.stringify({
+          query: query,
+          documents: objects
+        })
+      );
+      const callback = function(results) {
+        expect(results).toHaveLength(5);
+        done();
+      };
+      handleInputChanged('query', callback);
+      expect(fetch).toHaveBeenCalled();
     });
   });
 
