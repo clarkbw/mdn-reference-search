@@ -1,8 +1,8 @@
-## MDN Reference Search 
+## MDN Reference Search
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/clarkbw/mdn-reference-search.svg)](https://greenkeeper.io/)
 
-[Chrome](https://chrome.google.com/webstore/detail/mdn-code-search/nifjgldbgogopimfdfclafkhbadkjfca?hl=en-US) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/mdn-search/)
+Chrome [![Chrome Web Store](https://img.shields.io/chrome-web-store/d/nifjgldbgogopimfdfclafkhbadkjfca.svg)](https://chrome.google.com/webstore/detail/mdn-code-search/nifjgldbgogopimfdfclafkhbadkjfca) | Firefox [![Mozilla Add-on](https://img.shields.io/amo/d/mdn-search.svg)](https://addons.mozilla.org/en-US/firefox/addon/mdn-search/)
 ---|---
 
 A WebExtension that uses the keyword `mdn` to trigger a search of the [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) and [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference) References on [MDN](https://developer.mozilla.org/).
