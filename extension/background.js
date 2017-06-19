@@ -71,7 +71,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__highlight__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_webext_omnibox_highlight__ = __webpack_require__(4);
 /* harmony export (immutable) */ __webpack_exports__["b"] = handleInputChanged;
 /* harmony export (immutable) */ __webpack_exports__["c"] = handleInputEntered;
 const BASE_URL = `https://developer.mozilla.org`;
@@ -108,7 +108,7 @@ function handleResponse(response) {
       return resolve(pages.map(page => {
         return {
           content: page.url,
-          description: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__highlight__["a" /* default */])(page.title, json.query)
+          description: __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_webext_omnibox_highlight__["a" /* match */])(page.title, json.query)
         };
       }));
     });
@@ -151,25 +151,70 @@ chrome.omnibox.onInputEntered.addListener(__WEBPACK_IMPORTED_MODULE_0__omnibox__
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export chromeHighlightMatch */
-/* unused harmony export firefoxHighlightMatch */
-const isChrome = typeof browser === 'undefined';
-
-// Currently Firefox auto-highlights but Chrome requires this XML syntax
-function chromeHighlightMatch() {
-  let text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  let match = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-  return text.replace(match, `<match>${match}</match>`);
+/* harmony export (immutable) */ __webpack_exports__["b"] = match;
+/* harmony export (immutable) */ __webpack_exports__["c"] = url;
+/* harmony export (immutable) */ __webpack_exports__["d"] = dim;
+// https://developer.chrome.com/extensions/omnibox#type-SuggestResult
+function match(text = '', match = '') {
+  return text.replace(RegExp(match, 'g'), `<match>${match}</match>`);
 }
 
-function firefoxHighlightMatch(text) {
+function url(text = '', match = '') {
+  return text.replace(RegExp(match, 'g'), `<url>${match}</url>`);
+}
+
+function dim(text = '', match = '') {
+  return text.replace(RegExp(match, 'g'), `<dim>${match}</dim>`);
+}
+
+const isChrome = navigator.userAgent.indexOf('Firefox') === -1;
+/* harmony export (immutable) */ __webpack_exports__["a"] = isChrome;
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = match;
+/* harmony export (immutable) */ __webpack_exports__["b"] = url;
+/* unused harmony export dim */
+// Firefox doesn't support any of the XML syntax that Chrome supports so
+// these functions are all just dummy functions
+function match(text) {
   return text;
 }
 
-const highlight = isChrome ? chromeHighlightMatch : firefoxHighlightMatch;
+function url(text) {
+  return text;
+}
 
-/* harmony default export */ __webpack_exports__["a"] = (highlight);
+function dim(text) {
+  return text;
+}
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__chrome__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__firefox__ = __webpack_require__(3);
+
+
+
+const match = __WEBPACK_IMPORTED_MODULE_0__chrome__["a" /* isChrome */] ? __WEBPACK_IMPORTED_MODULE_0__chrome__["b" /* match */] : __WEBPACK_IMPORTED_MODULE_1__firefox__["a" /* match */];
+/* harmony export (immutable) */ __webpack_exports__["a"] = match;
+
+const url = __WEBPACK_IMPORTED_MODULE_0__chrome__["a" /* isChrome */] ? __WEBPACK_IMPORTED_MODULE_0__chrome__["c" /* url */] : __WEBPACK_IMPORTED_MODULE_1__firefox__["b" /* url */];
+/* unused harmony export url */
+
+const dim = __WEBPACK_IMPORTED_MODULE_0__chrome__["a" /* isChrome */] ? __WEBPACK_IMPORTED_MODULE_0__chrome__["d" /* dim */] : __WEBPACK_IMPORTED_MODULE_1__firefox__["b" /* url */];
+/* unused harmony export dim */
+
+
 
 /***/ })
 /******/ ]);
