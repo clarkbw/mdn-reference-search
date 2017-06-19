@@ -2,7 +2,7 @@ const BASE_URL = `https://developer.mozilla.org`;
 export const SEARCH_API_URL = `${BASE_URL}/en-US/search.json?topic=css&topic=js&q=`;
 export const SEARCH_DEFAULT_URL = `${BASE_URL}/en-US/search?q=`;
 
-import highlight from './highlight';
+import { match } from 'webext-omnibox-highlight';
 
 export const defaultSuggestion = {
   description: `Search MDN (e.g. "margin" | "splice")`
@@ -29,7 +29,7 @@ function handleResponse(response) {
         pages.map(page => {
           return {
             content: page.url,
-            description: highlight(page.title, json.query)
+            description: match(page.title, json.query)
           };
         })
       );

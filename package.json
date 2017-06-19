@@ -19,9 +19,15 @@
     "jest-webextension-mock": "^2.0.0",
     "lint-staged": "^4.0.0",
     "prettier": "^1.0.0",
+    "web-ext": "^1.9.1",
+    "webext-omnibox-highlight": "^2.0.0",
     "webpack": "^2.2.1"
   },
+  "config": {
+    "firefox": "nightly"
+  },
   "scripts": {
+    "start": "web-ext run --firefox=$npm_package_config_firefox -s extension",
     "precommit": "lint-staged",
     "prepush": "yarn test",
     "build": "webpack && yarn zip",
