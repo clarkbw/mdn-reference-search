@@ -17,7 +17,7 @@
     "jest": "^20.0.2",
     "jest-fetch-mock": "^1.0.8",
     "jest-webextension-mock": "^2.0.0",
-    "lint-staged": "^3.4.0",
+    "lint-staged": "^4.0.0",
     "prettier": "^1.0.0",
     "webpack": "^2.2.1"
   },
